@@ -1,13 +1,13 @@
 class TopController < ApplicationController
+  require 'bcrypt'   
+
   def main
     if session[:login_uid].present?
-      render "main"  
+      render "main"
     else
       render "login"
-    end 
+    end
   end
-  
-
 
   def login
     user = User.find_by(uid: params[:uid])
@@ -18,7 +18,6 @@ class TopController < ApplicationController
       render "error", status: 422
     end
   end
-
 
   def logout
     session.delete(:login_uid)
